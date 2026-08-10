@@ -1,0 +1,392 @@
+/* ==========================================================================
+   FUTURISTIC ATS RESUME ANALYZER SPECIAL STYLESHEET
+   ========================================================================== */
+
+.analyzer-page-layout {
+    padding-top: 80px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.analyzer-hero {
+    width: 100%;
+    padding: 60px 0;
+}
+
+.analyzer-grid-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+}
+
+/* --- Drop Zone Card --- */
+.drop-zone-card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed rgba(6, 182, 212, 0.3);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    background: rgba(10, 5, 30, 0.35);
+    transition: var(--transition-smooth);
+    padding: 40px;
+}
+
+.drop-zone-card:hover {
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+    background: rgba(10, 5, 30, 0.45);
+}
+
+.drop-zone-card.dragover {
+    border-color: var(--color-purple);
+    background: rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+    transform: scale(1.02);
+}
+
+.drop-zone-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    pointer-events: none; /* Allows drop listener on card directly */
+}
+
+.cloud-icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(6, 182, 212, 0.05);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    transition: var(--transition-smooth);
+}
+
+.drop-zone-card:hover .cloud-icon-box {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 15px var(--color-cyan-glow);
+    transform: translateY(-4px);
+}
+
+.cloud-upload-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.upload-heading {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.upload-desc {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    max-width: 250px;
+}
+
+.or-separator {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.or-separator::before, .or-separator::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Telemetry Panel Card --- */
+.telemetry-panel-card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.telemetry-panel-card .card-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.standby-icon-box {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: var(--transition-smooth);
+}
+
+.telemetry-panel-card:hover .standby-icon-box {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: var(--color-purple);
+    box-shadow: 0 0 15px var(--color-purple-glow);
+    transform: rotate(45deg);
+}
+
+.standby-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.telemetry-h {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.telemetry-p {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Double Action layout row */
+.double-action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Spinner / Progress Loading overrides */
+.spinner-telemetry {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-top-color: var(--color-cyan);
+    border-radius: 50%;
+    animation: spin-telemetry-key 1s linear infinite;
+    display: inline-block;
+}
+
+.scanning-loader-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.scanning-status-text {
+    font-size: 13px;
+    color: var(--color-cyan);
+}
+
+.scan-progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.scan-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-cyan), var(--color-purple));
+    border-radius: 10px;
+    transition: width 0.15s ease-out;
+}
+
+.console-logs-sub {
+    height: 160px;
+    background: #02000c;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-sm);
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.log-entry {
+    color: var(--color-text-muted);
+}
+
+.log-entry.success {
+    color: #10b981;
+}
+
+/* Results State Dashboard styles */
+.results-header-metrics {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.ats-gauge-circle {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.circular-chart {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 2.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke: var(--color-purple);
+    stroke-dashoffset: 0;
+    transition: stroke-dasharray 1.5s ease-in-out;
+}
+
+.circular-chart.purple .circle {
+    stroke: var(--color-purple);
+    filter: drop-shadow(0 0 5px var(--color-purple-glow));
+}
+
+.percentage {
+    fill: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    text-anchor: middle;
+}
+
+.ats-lbl {
+    font-size: 8px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+.results-meta-scores {
+    text-align: left;
+}
+
+.score-title {
+    font-size: 18px;
+    margin-bottom: 4px;
+    word-break: break-all;
+    max-width: 240px;
+}
+
+.keyword-bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.keyword-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+.bar-lbl {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.bar-lbl span:first-child {
+    color: var(--color-text-muted);
+}
+
+.bar-lbl span:last-child {
+    font-weight: 700;
+}
+
+.mini-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+.mini-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feedback-ai-box {
+    background: rgba(6, 182, 212, 0.04);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+    padding: 16px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.feedback-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.ai-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.feedback-ai-text {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+@keyframes spin-telemetry-key {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Responsive Layout Breakpoints --- */
+@media (max-width: 992px) {
+    .analyzer-grid-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 16px;
+    }
+}

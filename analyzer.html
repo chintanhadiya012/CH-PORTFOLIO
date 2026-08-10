@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Quantum ATS Resume Analyzer | Chintan Hadiya</title>
+    <meta name="description" content="Futuristic AI-powered ATS Resume Analyzer dashboard. Upload your resume to check keywords distribution, ATS optimization, and visual telemetry report.">
+    <meta name="keywords" content="Resume Analyzer, ATS Parser, Chintan Hadiya, Python, PDF Parser, Web Application">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Shared variables & baseline styling from portfolio + dedicated analyzer styling -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="analyzer.css">
+
+    <!-- FontAwesome / Lucide Icons via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+    <!-- Web Audio API SFX Toggle Overlay -->
+    <div class="audio-control" id="audio-toggle-container">
+        <button class="audio-btn" id="sound-toggle-btn" aria-label="Toggle sound effects" title="Toggle UI Sound Synthesizer">
+            <i data-lucide="volume-2" class="volume-icon"></i>
+            <span class="audio-text">SFX ON</span>
+        </button>
+    </div>
+
+    <!-- 3D Interactive Three.js Background -->
+    <canvas id="three-bg-canvas"></canvas>
+
+    <!-- Custom Cursor Glow -->
+    <div id="custom-cursor-glow"></div>
+    <div id="custom-cursor-dot"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar" id="top-navbar">
+        <div class="nav-container">
+            <a href="index.html#hero" class="nav-logo" id="logo-anchor">
+                <span class="logo-symbol">&lt;</span>
+                <span class="logo-name">CHINTAN</span>
+                <span class="logo-symbol">/&gt;</span>
+            </a>
+            
+            <nav class="nav-links-wrapper" id="desktop-navigation">
+                <a href="index.html#hero" class="nav-link" id="nav-home">Home</a>
+                <a href="index.html#about" class="nav-link" id="nav-about">About</a>
+                <a href="analyzer.html" class="nav-link active" id="nav-analyzer">Analyzer</a>
+                <a href="index.html#terminal-section" class="nav-link" id="nav-terminal">Terminal</a>
+                <a href="index.html#skills" class="nav-link" id="nav-skills">Skills</a>
+                <a href="index.html#projects" class="nav-link" id="nav-projects">Projects</a>
+                <a href="index.html#contact" class="nav-link" id="nav-contact">Contact</a>
+                <a href="ch_resume.pdf" download="Chintan_Hadiya_Resume.pdf" class="nav-link" id="nav-download" style="color: var(--color-cyan); font-weight: 700;">Resume <i data-lucide="download" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-left: 2px;"></i></a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="hamburger-btn" aria-label="Toggle navigation menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay Menu -->
+    <div class="mobile-nav-drawer" id="mobile-nav-overlay">
+        <nav class="mobile-drawer-links">
+            <a href="index.html#hero" class="mobile-link" id="mob-home">Home</a>
+            <a href="index.html#about" class="mobile-link" id="mob-about">About</a>
+            <a href="analyzer.html" class="mobile-link active" id="mob-analyzer">Analyzer</a>
+            <a href="index.html#terminal-section" class="mobile-link" id="mob-terminal">Terminal</a>
+            <a href="index.html#skills" class="mobile-link" id="mob-skills">Skills</a>
+            <a href="index.html#projects" class="mobile-link" id="mob-projects">Projects</a>
+            <a href="index.html#contact" class="mobile-link" id="mob-contact">Contact</a>
+            <a href="ch_resume.pdf" download="Chintan_Hadiya_Resume.pdf" class="mobile-link" id="mob-download" style="color: var(--color-cyan);">Download Resume <i data-lucide="download" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i></a>
+        </nav>
+    </div>
+
+    <!-- Main Container -->
+    <main class="analyzer-page-layout">
+        <section class="section-layout analyzer-hero">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;ATS-QUANTUM-ENGINE&gt;</span>
+                    <h1 class="section-title text-gradient-cyan">Quantum Resume Analyzer</h1>
+                    <p class="section-desc">Drop your own resume file below to run a client-side parsing telemetry report. Calculates scores, keyword matching, and generates AI optimization feedback.</p>
+                </div>
+
+                <div class="analyzer-grid-container">
+                    
+                    <!-- Drop Zone Card -->
+                    <div class="drop-zone-card glass-panel text-center" id="drop-zone">
+                        <div class="card-glow-bg glow-cyan"></div>
+                        <input type="file" id="file-selector-input" accept=".pdf,.txt" class="hidden">
+                        
+                        <div class="drop-zone-inner" id="drop-zone-content">
+                            <div class="cloud-icon-box">
+                                <i data-lucide="upload-cloud" class="cloud-upload-icon text-cyan"></i>
+                            </div>
+                            <h3 class="upload-heading">Drag & Drop Resume</h3>
+                            <p class="upload-desc">Supports PDF and Plain Text (.txt) formats</p>
+                            <span class="or-separator font-code">OR</span>
+                            <button class="action-btn btn-primary btn-sm" id="btn-browse-files">Browse Files</button>
+                        </div>
+                    </div>
+
+                    <!-- Scan & Analysis telemetry panel -->
+                    <div class="telemetry-panel-card glass-panel" id="telemetry-display-panel">
+                        <div class="card-glow-bg glow-purple"></div>
+                        <div class="card-inner" id="telemetry-card-inner">
+                            
+                            <!-- Initial Standby View -->
+                            <div class="analyzer-state-standby text-center" id="state-standby">
+                                <div class="standby-icon-box">
+                                    <i data-lucide="cpu" class="standby-icon text-purple"></i>
+                                </div>
+                                <h3 class="telemetry-h">Calibration System Ready</h3>
+                                <p class="telemetry-p">Awaiting upload. Once loaded, text content will be parsed client-side using WebGL telemetry threads.</p>
+                                <button class="action-btn btn-secondary-outline btn-sm btn-full-width" id="btn-load-ch-sample" style="border-color: var(--color-cyan);">
+                                    Analyze Chintan's Resume (Sample)
+                                    <i data-lucide="sparkles" class="btn-icon text-cyan"></i>
+                                </button>
+                            </div>
+
+                            <!-- Processing State (Loader) -->
+                            <div class="analyzer-state-loading hidden" id="state-loading">
+                                <div class="scanning-loader-row">
+                                    <span class="spinner-telemetry"></span>
+                                    <span class="scanning-status-text font-code" id="status-log-txt">Accessing file structures...</span>
+                                </div>
+                                <div class="scan-progress-bar">
+                                    <div class="scan-progress-fill" id="progress-bar-fill-elem"></div>
+                                </div>
+                                <div class="console-logs-sub font-code" id="analyzer-console-list">
+                                    <!-- Log elements -->
+                                </div>
+                            </div>
+
+                            <!-- Results State -->
+                            <div class="analyzer-state-results hidden" id="state-results">
+                                
+                                <div class="results-header-metrics">
+                                    <div class="ats-gauge-circle">
+                                        <svg viewBox="0 0 36 36" class="circular-chart purple">
+                                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" id="ats-score-stroke" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <text x="18" y="20.35" class="percentage font-code" id="ats-score-text">0%</text>
+                                        </svg>
+                                        <span class="ats-lbl font-code">ATS SCORE</span>
+                                    </div>
+                                    <div class="results-meta-scores">
+                                        <h3 class="score-title" id="anal-file-name">Resume Report</h3>
+                                        <p class="score-summary text-green font-code" id="anal-score-rating">OPTIMIZATION: SUCCESS</p>
+                                    </div>
+                                </div>
+
+                                <div class="keyword-bars-container">
+                                    <div class="keyword-bar-item">
+                                        <div class="bar-lbl"><span>Programming / Logic</span><span id="score-val-programming">0%</span></div>
+                                        <div class="mini-track"><div class="mini-fill bg-cyan" id="fill-bar-programming" style="width: 0%"></div></div>
+                                    </div>
+                                    <div class="keyword-bar-item">
+                                        <div class="bar-lbl"><span>Full-stack Development</span><span id="score-val-web">0%</span></div>
+                                        <div class="mini-track"><div class="mini-fill bg-purple" id="fill-bar-web" style="width: 0%"></div></div>
+                                    </div>
+                                    <div class="keyword-bar-item">
+                                        <div class="bar-lbl"><span>Graphic & UI Design</span><span id="score-val-design">0%</span></div>
+                                        <div class="mini-track"><div class="mini-fill bg-pink" id="fill-bar-design" style="width: 0%"></div></div>
+                                    </div>
+                                    <div class="keyword-bar-item">
+                                        <div class="bar-lbl"><span>Database & Systems</span><span id="score-val-systems">0%</span></div>
+                                        <div class="mini-track"><div class="mini-fill bg-orange" id="fill-bar-systems" style="width: 0%"></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="feedback-ai-box">
+                                    <div class="feedback-icon-title"><i data-lucide="brain" class="ai-icon text-cyan"></i> <span>Telemetry Report Comments:</span></div>
+                                    <p class="feedback-ai-text" id="ai-critique-paragraph">
+                                        Evaluating keywords...
+                                    </p>
+                                </div>
+
+                                <div class="double-action-row">
+                                    <button class="action-btn btn-secondary-outline btn-sm" id="btn-re-upload">
+                                        Analyze Another
+                                        <i data-lucide="refresh-cw" class="btn-icon"></i>
+                                    </button>
+                                    <a href="index.html#contact" class="action-btn btn-primary btn-sm">
+                                        Contact Chintan
+                                        <i data-lucide="mail" class="btn-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Panel -->
+    <footer class="footer-layout" id="bottom-footer">
+        <div class="container footer-content-wrapper">
+            <div class="footer-left-content">
+                <span class="footer-title font-code">&lt;CHINTAN HADIYA/&gt;</span>
+                <p class="footer-summary">B.Tech Computer Engineering student creating highly operational, rich designs and custom logic interfaces.</p>
+            </div>
+            
+            <div class="footer-right-content">
+                <div class="footer-nav">
+                    <a href="index.html#hero">Home</a>
+                    <a href="index.html#about">Bio</a>
+                    <a href="analyzer.html">Analyzer</a>
+                    <a href="index.html#terminal-section">Terminal</a>
+                    <a href="index.html#skills">Skills</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="copyright-row">
+                    &copy; 2026 Chintan Hadiya. All rights reserved. Designed for excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF.js via CDN for reading PDF client-side -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+
+    <!-- ThreeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Analyzer Core Logic -->
+    <script src="script.js"></script>
+    <script src="analyzer.js"></script>
+</body>
+</html>

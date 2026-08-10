@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Chintan Hadiya | B.Tech Computer Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Chintan Hadiya, B.Tech Computer Engineering Student at IAR University (2024-2028). Specializing in web technologies, software systems, and interactive 3D frontend design.">
+    <meta name="keywords" content="Chintan Hadiya, Computer Engineering, B.Tech, IAR University, Web Developer, 3D Portfolio, JavaScript, Three.js">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chintanhadiya.dev/">
+    <meta property="og:title" content="Chintan Hadiya | B.Tech Computer Engineer Portfolio">
+    <meta property="og:description" content="Explore the interactive 3D portfolio of Chintan Hadiya. Systems engineer, frontend developer, and computer engineering student.">
+    <meta property="og:image" content="profile.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Chintan Hadiya | B.Tech Computer Engineer Portfolio">
+    <meta property="twitter:description" content="Explore the interactive 3D portfolio of Chintan Hadiya. Systems engineer, frontend developer, and computer engineering student.">
+    <meta property="twitter:image" content="profile.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome / Lucide Icons via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+    <!-- Web Audio API SFX Toggle Overlay -->
+    <div class="audio-control" id="audio-toggle-container">
+        <button class="audio-btn" id="sound-toggle-btn" aria-label="Toggle sound effects" title="Toggle UI Sound Synthesizer">
+            <i data-lucide="volume-2" class="volume-icon"></i>
+            <span class="audio-text">SFX ON</span>
+        </button>
+    </div>
+
+    <!-- 3D Interactive Three.js Background -->
+    <canvas id="three-bg-canvas"></canvas>
+
+    <!-- Custom Cursor Glow -->
+    <div id="custom-cursor-glow"></div>
+    <div id="custom-cursor-dot"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar" id="top-navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" id="logo-anchor">
+                <span class="logo-symbol">&lt;</span>
+                <span class="logo-name">CHINTAN</span>
+                <span class="logo-symbol">/&gt;</span>
+            </a>
+            
+            <nav class="nav-links-wrapper" id="desktop-navigation">
+                <a href="#hero" class="nav-link active" id="nav-home">Home</a>
+                <a href="#about" class="nav-link" id="nav-about">About</a>
+                <a href="analyzer.html" class="nav-link" id="nav-analyzer">Analyzer</a>
+                <a href="#terminal-section" class="nav-link" id="nav-terminal">Terminal</a>
+                <a href="#skills" class="nav-link" id="nav-skills">Skills</a>
+                <a href="#projects" class="nav-link" id="nav-projects">Projects</a>
+                <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+                <a href="ch_resume.pdf" download="Chintan_Hadiya_Resume.pdf" class="nav-link" id="nav-download" style="color: var(--color-cyan); font-weight: 700;">Resume <i data-lucide="download" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-left: 2px;"></i></a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="hamburger-btn" aria-label="Toggle navigation menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay Menu -->
+    <div class="mobile-nav-drawer" id="mobile-nav-overlay">
+        <nav class="mobile-drawer-links">
+            <a href="#hero" class="mobile-link" id="mob-home">Home</a>
+            <a href="#about" class="mobile-link" id="mob-about">About</a>
+            <a href="analyzer.html" class="mobile-link" id="mob-analyzer">Analyzer</a>
+            <a href="#terminal-section" class="mobile-link" id="mob-terminal">Terminal</a>
+            <a href="#skills" class="mobile-link" id="mob-skills">Skills</a>
+            <a href="#projects" class="mobile-link" id="mob-projects">Projects</a>
+            <a href="#contact" class="mobile-link" id="mob-contact">Contact</a>
+            <a href="ch_resume.pdf" download="Chintan_Hadiya_Resume.pdf" class="mobile-link" id="mob-download" style="color: var(--color-cyan);">Download Resume <i data-lucide="download" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i></a>
+        </nav>
+    </div>
+
+    <!-- Scroll Indicator Progress Line -->
+    <div class="scroll-progress-indicator" id="scroll-progress-line"></div>
+
+    <!-- Main Content Container -->
+    <main id="main-content-layout">
+
+        <!-- Hero Section -->
+        <section class="section-layout hero" id="hero">
+            <div class="grid-container hero-grid">
+                
+                <div class="hero-text-content">
+                    <div class="badge-glow-wrapper scroll-reveal" id="hero-badge">
+                        <span class="pulse-dot"></span>
+                        <span class="badge-text">B.TECH COMPUTER ENGINEER</span>
+                        <span class="badge-separator">|</span>
+                        <span class="badge-text text-gradient-cyan">CLASS OF '28</span>
+                    </div>
+                    
+                    <h1 class="hero-title scroll-reveal" id="hero-h1">
+                        Building Intelligent <span class="text-glow-purple">Systems & Code</span>.
+                    </h1>
+                    
+                    <p class="hero-paragraph scroll-reveal" id="hero-p">
+                        I'm <strong class="highlight-text">Chintan Hadiya</strong>, a Computer Engineering undergraduate at IAR University (2024-2028) specializing in software systems, full-stack web applications, and graphic design. Bridging clean back-end logic with responsive visual interfaces.
+                    </p>
+                    
+                    <div class="hero-actions-container scroll-reveal" id="hero-cta-actions">
+                        <a href="#projects" class="action-btn btn-primary" id="hero-view-work">
+                            Explore Projects
+                            <i data-lucide="arrow-up-right" class="btn-icon"></i>
+                        </a>
+                        <a href="ch_resume.pdf" target="_blank" class="action-btn btn-secondary-outline" id="hero-resume-view">
+                            View Resume
+                            <i data-lucide="file-text" class="btn-icon"></i>
+                        </a>
+                        <a href="ch_resume.pdf" download="Chintan_Hadiya_Resume.pdf" class="action-btn btn-secondary-outline" id="hero-resume-download">
+                            Download Resume
+                            <i data-lucide="download" class="btn-icon"></i>
+                        </a>
+                        <a href="analyzer.html" class="action-btn btn-secondary-outline" id="hero-analyzer-jump" style="border-color: var(--color-purple);">
+                            Analyze Resume
+                            <i data-lucide="scan" class="btn-icon text-purple"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-profile-container scroll-reveal" id="hero-profile-box">
+                    <!-- 3D Holographic Glare Card (Vanilla Tilt) -->
+                    <div class="hologram-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.5" id="tilt-profile-card">
+                        <div class="hologram-scan-line"></div>
+                        <div class="hologram-content">
+                            <div class="avatar-frame">
+                                <img src="profile.jpg" alt="Chintan Hadiya" class="profile-avatar-img" id="profile-img-element">
+                                <div class="avatar-overlay"></div>
+                            </div>
+                            <div class="hologram-details">
+                                <h2 class="hologram-name">Chintan Hadiya</h2>
+                                <p class="hologram-university">IAR UNIVERSITY</p>
+                                <div class="hologram-stats-row">
+                                    <div class="stat-node">
+                                        <span class="stat-label">COURSE</span>
+                                        <span class="stat-val font-code">B.TECH CE</span>
+                                    </div>
+                                    <div class="stat-node">
+                                        <span class="stat-label">EXP</span>
+                                        <span class="stat-val font-code">2024-28</span>
+                                    </div>
+                                    <div class="stat-node text-right">
+                                        <span class="stat-label">STATUS</span>
+                                        <span class="stat-val text-green font-code">ONLINE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hologram-corners">
+                            <span class="corner tl"></span>
+                            <span class="corner tr"></span>
+                            <span class="corner bl"></span>
+                            <span class="corner br"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <a href="#about" class="scroll-down-arrow" id="down-scroll-nav" aria-label="Scroll to about section">
+                <span class="scroll-icon-mouse">
+                    <span class="wheel"></span>
+                </span>
+                <span class="scroll-icon-arrow"></span>
+            </a>
+        </section>
+
+
+        <!-- About & Education Timeline Section -->
+        <section class="section-layout about-section" id="about">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;BIO-DATA&gt;</span>
+                    <h2 class="section-title">Academic & Path</h2>
+                </div>
+
+                <div class="grid-container about-grid">
+                    <div class="about-card glass-panel scroll-reveal-left" id="about-card-left">
+                        <div class="card-glow-bg glow-purple"></div>
+                        <div class="card-inner">
+                            <div class="card-icon-container">
+                                <i data-lucide="user" class="card-icon text-purple"></i>
+                            </div>
+                            <h3 class="card-title">Who is Chintan?</h3>
+                            <p class="card-desc">
+                                I am an aspiring computer engineer based in India, currently completing my Bachelor of Technology degree. I am deeply enthusiastic about computing infrastructure, modern algorithms, and interactive software designs.
+                            </p>
+                            <p class="card-desc">
+                                At IAR University, I bridge theoretical concepts of computer science with practical application stacks, building responsive sites, algorithmic models, and systems designs.
+                            </p>
+                            <div class="info-badges-list">
+                                <span class="badge-item"><i data-lucide="code-2" class="badge-icon"></i> Frontend Logic</span>
+                                <span class="badge-item"><i data-lucide="cpu" class="badge-icon"></i> System Architecture</span>
+                                <span class="badge-item"><i data-lucide="database" class="badge-icon"></i> Database Management</span>
+                                <span class="badge-item"><i data-lucide="activity" class="badge-icon"></i> Creative UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container glass-panel scroll-reveal-right" id="about-card-right">
+                        <div class="card-glow-bg glow-cyan"></div>
+                        <div class="card-inner">
+                            <div class="card-icon-container">
+                                <i data-lucide="graduation-cap" class="card-icon text-cyan"></i>
+                            </div>
+                            <h3 class="card-title">Academic Milestones</h3>
+                            
+                            <div class="vertical-timeline">
+                                <!-- Timeline Item 1 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-bullet cyan-bullet"></div>
+                                    <div class="timeline-meta">
+                                        <span class="timeline-year font-code">2027 - 2028</span>
+                                        <h4 class="timeline-degree">Specialization in Cybersecurity & Labs</h4>
+                                        <p class="timeline-inst">IAR University</p>
+                                        <p class="timeline-desc">Specialized focus on cybersecurity, network security analysis, ethical hacking, security telemetry, and major capstone projects.</p>
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 2 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-bullet purple-bullet"></div>
+                                    <div class="timeline-meta">
+                                        <span class="timeline-year font-code">2025 - 2026</span>
+                                        <h4 class="timeline-degree">Core Computer Engineering</h4>
+                                        <p class="timeline-inst">IAR University</p>
+                                        <p class="timeline-desc">Intensive analysis of algorithms, operating system internals, object-oriented methodologies, and database system design.</p>
+                                    </div>
+                                </div>
+                                <!-- Timeline Item 3 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-bullet pink-bullet"></div>
+                                    <div class="timeline-meta">
+                                        <span class="timeline-year font-code">2024</span>
+                                        <h4 class="timeline-degree">B.Tech Admission & Foundations</h4>
+                                        <p class="timeline-inst">IAR University</p>
+                                        <p class="timeline-desc">Commenced B.Tech Computer Engineering. Initiated studies in engineering mathematics, basic computing labs, and standard scripting.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- Interactive Terminal Console Section -->
+        <section class="section-layout terminal-section" id="terminal-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;DEV-SHELL&gt;</span>
+                    <h2 class="section-title">Interactive Console</h2>
+                    <p class="section-desc">Type commands directly to interact with my portfolio database system.</p>
+                </div>
+
+                <div class="terminal-shell scroll-reveal" id="terminal-widget">
+                    <!-- Matrix Screen Canvas Overlay -->
+                    <canvas id="matrix-canvas" class="hidden"></canvas>
+
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot-btn red-btn"></span>
+                            <span class="dot-btn yellow-btn"></span>
+                            <span class="dot-btn green-btn"></span>
+                        </div>
+                        <div class="terminal-title font-code">chintan@desktop:~ (powershell)</div>
+                        <div class="terminal-action-icons">
+                            <i data-lucide="minus" class="term-icon"></i>
+                            <i data-lucide="square" class="term-icon size-sm"></i>
+                            <i data-lucide="x" class="term-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="terminal-body font-code" id="terminal-screen">
+                        <div class="terminal-line text-cyan font-bold">Chintan's Shell Database System [Version 1.0.4]</div>
+                        <div class="terminal-line text-muted">Initialize systems connect ... OK. Modules loaded ... OK.</div>
+                        <div class="terminal-line">Type <span class="text-purple font-bold">help</span> to view available operations, or try <span class="text-green font-bold">matrix</span> for fun.</div>
+                        <br>
+                        
+                        <!-- Terminal Log Content -->
+                        <div id="terminal-history"></div>
+
+                        <!-- Terminal Command Row -->
+                        <div class="terminal-input-row">
+                            <span class="terminal-prompt">PS C:\Users\chintan&gt;</span>
+                            <input type="text" id="terminal-stdin" autocomplete="off" autofocus placeholder="Type a command...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Skills Grid Section -->
+        <section class="section-layout skills-section" id="skills">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;SKILL-STACK&gt;</span>
+                    <h2 class="section-title">Technical Expertise</h2>
+                </div>
+
+                <div class="skills-grid-wrapper">
+                    <!-- Design & Creative -->
+                    <div class="skills-category-card glass-panel scroll-reveal" id="skill-cat-1">
+                        <div class="card-glow-bg glow-purple"></div>
+                        <div class="card-inner">
+                            <h3 class="category-title"><i data-lucide="palette" class="cat-icon text-purple"></i> Design & Creative</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Canva (A+ Certified)</span>
+                                        <span class="skill-val font-code">95%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-purple" style="width: 0%;" data-width="95%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Adobe Photoshop & Illustrator</span>
+                                        <span class="skill-val font-code">88%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-purple" style="width: 0%;" data-width="88%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">UI/UX Principles</span>
+                                        <span class="skill-val font-code">85%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-purple" style="width: 0%;" data-width="85%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Visual Communication</span>
+                                        <span class="skill-val font-code">90%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-purple" style="width: 0%;" data-width="90%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Programming Languages -->
+                    <div class="skills-category-card glass-panel scroll-reveal" id="skill-cat-2">
+                        <div class="card-glow-bg glow-cyan"></div>
+                        <div class="card-inner">
+                            <h3 class="category-title"><i data-lucide="terminal" class="cat-icon text-cyan"></i> Programming Languages</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">C / C++</span>
+                                        <span class="skill-val font-code">88%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-cyan" style="width: 0%;" data-width="88%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Python (101 Certified)</span>
+                                        <span class="skill-val font-code">90%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-cyan" style="width: 0%;" data-width="90%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Java</span>
+                                        <span class="skill-val font-code">75%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-cyan" style="width: 0%;" data-width="75%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web & Analytics -->
+                    <div class="skills-category-card glass-panel scroll-reveal" id="skill-cat-3">
+                        <div class="card-glow-bg glow-pink"></div>
+                        <div class="card-inner">
+                            <h3 class="category-title"><i data-lucide="globe" class="cat-icon text-pink"></i> Web & Analytics</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Web App Development (Flask/Python)</span>
+                                        <span class="skill-val font-code">85%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-pink" style="width: 0%;" data-width="85%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Google Analytics (Great Learning)</span>
+                                        <span class="skill-val font-code">80%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-pink" style="width: 0%;" data-width="80%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="skills-category-card glass-panel scroll-reveal" id="skill-cat-4">
+                        <div class="card-glow-bg glow-orange"></div>
+                        <div class="card-inner">
+                            <h3 class="category-title"><i data-lucide="users" class="cat-icon text-orange"></i> Soft Skills</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Problem-Solving</span>
+                                        <span class="skill-val font-code">90%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-orange" style="width: 0%;" data-width="90%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Teamwork & Collaboration</span>
+                                        <span class="skill-val font-code">92%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-orange" style="width: 0%;" data-width="92%"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Innovative Thinking & Learning</span>
+                                        <span class="skill-val font-code">95%</span>
+                                    </div>
+                                    <div class="progress-track"><div class="progress-fill bg-orange" style="width: 0%;" data-width="95%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Live GitHub Integration Section -->
+        <section class="section-layout github-section" id="github-stats">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;GIT-HUB&gt;</span>
+                    <h2 class="section-title">Live GitHub Stats</h2>
+                    <p class="section-desc">Real-time data fetched directly from the GitHub API.</p>
+                </div>
+
+                <div class="github-container glass-panel scroll-reveal" id="github-data-container">
+                    <div id="github-loading" class="text-center font-code text-cyan" style="padding: 40px;">Fetching data from GitHub...</div>
+                    
+                    <div id="github-content" class="hidden" style="display: none; flex-direction: column;">
+                        <div class="github-profile-row">
+                            <img id="gh-avatar" src="" alt="GitHub Avatar" class="gh-avatar">
+                            <div class="gh-info">
+                                <h3 id="gh-name" class="gh-name"></h3>
+                                <a id="gh-link" href="#" target="_blank" class="gh-link text-cyan">@<span id="gh-username"></span></a>
+                            </div>
+                            <div class="gh-stats-row">
+                                <div class="gh-stat-box">
+                                    <h4 id="gh-repos" class="text-gradient-purple">0</h4>
+                                    <span>Repositories</span>
+                                </div>
+                                <div class="gh-stat-box">
+                                    <h4 id="gh-followers" class="text-gradient-pink">0</h4>
+                                    <span>Followers</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="gh-repos-title font-code" style="margin-bottom: 20px;">Recent Repositories</h4>
+                        <div class="gh-repos-list" id="gh-repos-list">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Projects Showcase Section -->
+        <section class="section-layout projects-section" id="projects">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;PORTFOLIO-PROJECTS&gt;</span>
+                    <h2 class="section-title">Portfolio Projects</h2>
+                    <p class="section-desc">Selected technical projects demonstrating web application development, backend systems, and interactive UI design.</p>
+                </div>
+
+                <!-- Filter Navigation Tab List -->
+                <div class="filter-wrapper scroll-reveal" id="project-filters">
+                    <button class="filter-tab active" data-filter="all" id="tab-all">All Projects</button>
+                    <button class="filter-tab" data-filter="web" id="tab-web">Web Applications</button>
+                </div>
+
+                <!-- Projects grid structure -->
+                <div class="grid-container projects-grid" id="projects-grid-holder">
+                    <!-- Project 1: SchemeDekho -->
+                    <div class="project-card-item glass-panel scroll-reveal project-modal-trigger" data-category="web" id="p-card-schemedekho" data-project-id="schemedekho" style="cursor: pointer;">
+                        <div class="project-image-slot">
+                            <div class="project-art-glow bg-gradient-cyan"></div>
+                            <i data-lucide="server" class="project-big-icon text-cyan"></i>
+                            <div class="project-label font-code">WEB APPLICATION</div>
+                        </div>
+                        <div class="project-content-slot">
+                            <h3 class="project-card-title">SchemeDekho</h3>
+                            <p class="project-card-summary">A smart portal to check eligibility for government schemes dynamically using Python Flask backend and demographic filters.</p>
+                            <div class="project-tags">
+                                <span class="tag">Python (Flask)</span>
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">Decision Trees</span>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 20px;">
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm" style="flex: 1; text-align: center; padding: 8px; font-size: 12px; position: relative; z-index: 10;" onclick="event.stopPropagation(); alert('Live demo coming soon!')">Live Demo</a>
+                                <a href="https://github.com/chintanhadiya012/Scheme-Dekho" target="_blank" class="btn btn-secondary-outline btn-sm" style="flex: 1; text-align: center; padding: 8px; font-size: 12px; position: relative; z-index: 10;" onclick="event.stopPropagation()">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Interactive 3D Portfolio -->
+                    <div class="project-card-item glass-panel scroll-reveal project-modal-trigger" data-category="web" id="p-card-portfolio" data-project-id="portfolio" style="cursor: pointer;">
+                        <div class="project-image-slot">
+                            <div class="project-art-glow bg-gradient-purple"></div>
+                            <i data-lucide="layers" class="project-big-icon text-purple"></i>
+                            <div class="project-label font-code">PORTFOLIO WEBSITE</div>
+                        </div>
+                        <div class="project-content-slot">
+                            <h3 class="project-card-title">Portfolio Website</h3>
+                            <p class="project-card-summary">A high-performance personal engineering portfolio featuring interactive Three.js 3D background canvas, live GitHub integration, ATS Resume Analyzer, and a simulated terminal console.</p>
+                            <div class="project-tags">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Three.js</span>
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">Flask API</span>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 20px;">
+                                <a href="#" class="btn btn-primary btn-sm" style="flex: 1; text-align: center; padding: 8px; font-size: 12px; position: relative; z-index: 10;" onclick="event.stopPropagation(); window.scrollTo({top: 0, behavior: 'smooth'});">Live View</a>
+                                <a href="https://github.com/chintanhadiya012" target="_blank" class="btn btn-secondary-outline btn-sm" style="flex: 1; text-align: center; padding: 8px; font-size: 12px; position: relative; z-index: 10;" onclick="event.stopPropagation()">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Form Section -->
+        <section class="section-layout contact-section" id="contact">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-code">&lt;GET-IN-TOUCH&gt;</span>
+                    <h2 class="section-title">Communicate</h2>
+                    <p class="section-desc">Reach out for collaborations, academic projects, or professional inquiries.</p>
+                </div>
+
+                <div class="contact-card-shell glass-panel scroll-reveal" id="contact-wrapper">
+                    <div class="card-glow-bg glow-purple"></div>
+                    <div class="contact-layout-grid">
+                        
+                        <div class="contact-channels-info">
+                            <h3 class="channel-title">Connect Details</h3>
+                            <p class="channel-desc">Feel free to drop a message. I usually respond within a few hours.</p>
+                            
+                            <div class="channels-details-list">
+                                <div class="channel-item">
+                                    <div class="channel-icon-bg">
+                                        <i data-lucide="mail" class="channel-icon"></i>
+                                    </div>
+                                    <div class="channel-meta" style="flex: 1;">
+                                        <span class="meta-lbl font-code">EMAIL ADDRESS</span>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <a href="mailto:chintanhadiya83@gmail.com" class="meta-val font-code" id="contact-email-link">chintanhadiya83@gmail.com</a>
+                                            <button type="button" onclick="navigator.clipboard.writeText('chintanhadiya83@gmail.com'); alert('Email copied!');" style="background:none; border:none; color:var(--color-cyan); cursor:pointer;" title="Copy Email"><i data-lucide="copy" style="width: 16px; height: 16px;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="channel-item">
+                                    <div class="channel-icon-bg">
+                                        <i data-lucide="phone" class="channel-icon"></i>
+                                    </div>
+                                    <div class="channel-meta" style="flex: 1;">
+                                        <span class="meta-lbl font-code">PHONE NUMBER</span>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span class="meta-val font-code">+91 9725751439</span>
+                                            <button type="button" onclick="navigator.clipboard.writeText('+91 9725751439'); alert('Phone number copied!');" style="background:none; border:none; color:var(--color-cyan); cursor:pointer;" title="Copy Phone Number"><i data-lucide="copy" style="width: 16px; height: 16px;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="channel-item">
+                                    <div class="channel-icon-bg">
+                                        <i data-lucide="map-pin" class="channel-icon"></i>
+                                    </div>
+                                    <div class="channel-meta">
+                                        <span class="meta-lbl font-code">CURRENT LOCATION</span>
+                                        <span class="meta-val">Gujarat, India</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-side">
+                            <form id="portfolio-form" class="form-wrapper">
+                                <div class="form-row">
+                                    <div class="form-group-item">
+                                        <label for="usr-name">Your Name</label>
+                                        <input type="text" id="usr-name" name="name" required placeholder="John Doe">
+                                    </div>
+                                    <div class="form-group-item">
+                                        <label for="usr-email">Your Email</label>
+                                        <input type="email" id="usr-email" name="email" required placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-group-item">
+                                    <label for="usr-subject">Subject</label>
+                                    <input type="text" id="usr-subject" name="subject" required placeholder="Collaboration Idea">
+                                </div>
+                                <div class="form-group-item">
+                                    <label for="usr-message">Message details</label>
+                                    <textarea id="usr-message" name="message" rows="5" required placeholder="Hi Chintan, I would like to work with you on..."></textarea>
+                                </div>
+
+                                <button type="submit" class="action-btn btn-primary btn-full-width" id="form-submit-button">
+                                    Send Message
+                                    <i data-lucide="send" class="btn-icon"></i>
+                                </button>
+                            </form>
+
+                            <!-- Success Modal Inside Form -->
+                            <div class="success-alert-box hidden" id="form-alert-feedback">
+                                <div class="alert-icon-box">
+                                    <i data-lucide="check-circle" class="alert-success-icon"></i>
+                                </div>
+                                <h4 class="alert-heading">Connection Sent Successfully!</h4>
+                                <p class="alert-message">Thank you for your response. Your data was recorded on my simulated server stack.</p>
+                                <button type="button" class="btn btn-secondary-outline btn-sm" id="btn-reset-contact-form">Send Another Message</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer Panel -->
+    <footer class="footer-layout" id="bottom-footer">
+        <div class="container footer-content-wrapper" style="justify-content: center; text-align: center;">
+            <div class="footer-left-content" style="max-width: 100%;">
+                <span class="footer-title font-code">&lt;CHINTAN HADIYA/&gt;</span>
+                <p class="footer-summary">B.Tech Computer Engineering student creating highly operational, rich designs and custom logic interfaces.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Project Modals overlay -->
+    <div class="modal-box-backdrop hidden" id="details-project-modal" aria-hidden="true" role="dialog">
+        <div class="modal-body-container glass-panel">
+            <button class="modal-close-trigger-btn" id="modal-close-button" aria-label="Close project modal">
+                <i data-lucide="x" class="close-icon"></i>
+            </button>
+            <div class="modal-dynamic-content" id="modal-viewport">
+                <!-- Injected via script.js -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CDN Library Scripts -->
+    <!-- ThreeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Vanilla Tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    
+    <!-- Core Script Logic -->
+    <script src="script.js"></script>
+</body>
+</html>

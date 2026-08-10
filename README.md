@@ -11,7 +11,7 @@ An interactive, high-performance personal engineering portfolio platform featuri
 - **Institution**: IAR University
 - **Specialization**: Cybersecurity & Network Systems
 - **GitHub**: [@chintanhadiya012](https://github.com/chintanhadiya012)
-- **Contact Email**: [chintanhadiya83@gmail.com](mailto:chintanhadiya12@gmail.com)
+- **Contact Email**: [chintanhadiya83@gmail.com](mailto:chintanhadiya83@gmail.com)
 - **Phone**: +91 9725751439
 
 ---
@@ -86,15 +86,24 @@ CH PORTFOLIO/
 1. **Install Dependencies**:
    ```bash
    pip install flask
+   ```
 
 2. **Launch Server**:
    ```bash
    python app.py
+   ```
 
 3. **Open in Browser**:
    Navigate to `http://127.0.0.1:5000/` in your browser.
+
+---
 
 ### Option 2: Static Opening
 
 Simply double click `index.html` or open it directly in any modern browser.
 
+---
+
+## 📜 License & Copyright
+
+Designed and developed by **Chintan Hadiya**. All rights reserved.

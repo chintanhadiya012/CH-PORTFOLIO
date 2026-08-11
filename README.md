@@ -10,13 +10,13 @@ An interactive, high-performance personal engineering portfolio platform featuri
 - Degree: Bachelor of Technology (B.Tech) in Computer Engineering (2024 – 2028)
 - Institution: IAR University
 - Specialization: Cybersecurity & Network Systems
-- **GitHub**: [@chintanhadiya012](https://github.com/chintanhadiya012)
-- **Contact Email**: [chintanhadiya83@gmail.com](mailto:chintanhadiya83@gmail.com)
-- **Phone**: +91 9725751439
+- GitHub: [@chintanhadiya012](https://github.com/chintanhadiya012)
+- Contact Email: [chintanhadiya83@gmail.com](mailto:chintanhadiya83@gmail.com)
+- Phone: +91 9725751439
 
 ---
 
-## ✨ Key Features & System Modules
+✨ Key Features & System Modules
 
 ### 🌐 1. Hardware-Accelerated 3D Canvas
 - Built with **Three.js** and WebGL.

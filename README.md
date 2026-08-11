@@ -102,8 +102,5 @@ CH PORTFOLIO/
 
 Simply double click `index.html` or open it directly in any modern browser.
 
----
 
-## 📜 License & Copyright
 
-Designed and developed by **Chintan Hadiya**. All rights reserved.
